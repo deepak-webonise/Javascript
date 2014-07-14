@@ -1,0 +1,42 @@
+<html>
+<head>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<title>Javascript Assignment 2</title>
+	<script src="graph.js" type="text/javascript"></script>
+	<style>
+		td{	  
+    			 
+                 	 
+                	margin:100px;
+			
+		  }
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>
+				<h3>Linear Equation Graph Generator</h3>
+				<form>
+					<label>Linear Equation :</label><input type="text" name="eqn" id="eqn" required/></lable><br>
+					<label>Steps :</label><input type="number" name="steps" id="steps" required/></lable><br>
+					<label>Starting Point :</label><input type="number" name="startp" id="startp" required/></lable><br>
+					<label>Ending Point :</label><input type="number" name="endp" id="endp" required/></lable><br>
+
+					<input type="button" value="Submit" onclick="get();"/>
+					<input type="button" value="Reset" onclick="location.reload(true);"/>
+				</form>
+			</td>
+			<td>
+				<canvas id="canvas" width="500" height="500">
+ 				Your browser does not support the HTML 5 Canvas.
+				</canvas>
+			</td>
+		<tr>
+	<div>
+		
+		
+	</div>
+</body>
+</html>
