@@ -19,7 +19,7 @@ Canvasapp2.prototype.set=function(x,y,cst,op){
 
 Canvasapp2.prototype.drawGrid2=function(){
     //draw vertical line
-    for (i=0;i<=this._c.width;i+=(this._c.width)/this._step)
+    for (i=0;i<=this._c.width;i+=(this._c.width)/10)
     {
 
         if (i == (this._c.width)/2) // Special handling for horiz/vert axes
@@ -50,7 +50,7 @@ Canvasapp2.prototype.drawGrid2=function(){
     this._ctx.font = '20px _sans';
     this._ctx.textBaseline = 'hanging';
     this._ctx.fillText ('0',0,0);
-    for (i=-5;i<=5;i++)
+    for (i=-10;i<=10;i++)
      {
         if (i != 0) { 
            // horizontal label
@@ -67,7 +67,9 @@ Canvasapp2.prototype.drawLine2=function(){
         var ycof=[],xcof=[];
         for(var i=0; i< 3;i++)
         {
-            switch(this._op) {
+           //finiding the co-ordinates of x and y coefficients.
+           switch(this._op) {
+                                   //finding the cordinates of y coefficient depending on operator 
                                     case "+":
                                              ycof[i] = eval((this._cst - (this._x * i ))/this._y);
                                               break;
@@ -86,23 +88,30 @@ Canvasapp2.prototype.drawLine2=function(){
                                             break;
                                 }
  
-    
+            //adding x co-oedinates 
             xcof[i] = i;
             
         }
         alert(ycof);
         alert(xcof);
+        this._ctx.font = '15px _sans';
+        this._ctx.textBaseline = 'bottom';
         for(var i=-5; i< 5;i++)
         {
-                    alert(ycof);
-                     alert(xcof);
+                    
                 for(var j=-5; j<5;j++)
                 {
                           
-                        if(j==ycof[i] && i == xcof[i])
+                        if((j * (this._c.width/10)) ==(ycof[i] * (this._c.width/10)) && (i * (this._c.width/10)) == (xcof[i])* (this._c.width/10))
                         {
 
-                            this._ctx.fillRect(xcof[j] * (this._c.width/10),-ycof[j] * (this._c.width/10),10,10); 
+                            this._ctx.fillRect(xcof[i] * (this._c.width/10),-ycof[i] * (this._c.width/10),10,10); 
+                            this._ctx.fillText ("("+xcof[i].toString()+","+ycof[i].toString()+")", xcof[i] * (this._c.width/10), -ycof[i] * (this._c.width/10));
+                           /* this._ctx.moveTo(i * (this._c.width/10),i* (this._c.width/10));
+                            this._ctx.strokeStyle = 'green';
+                            this._ctx.lineTo(i* (this._c.width/10),j* (this._c.width/10));
+                            this._ctx.stroke();*/
+                            
 
                         }
                           
