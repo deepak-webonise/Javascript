@@ -104,7 +104,7 @@ Canvasapp2.prototype.drawLine2=function(){
         for(var i=-5; i< 5;i++)
         {
                     
-                for(var j=-5; j<5;j++)
+               for(var j=-5; j<5;j++)
                 {
                         //validating x,y co-ordinates(equatio) with i,j co-ordinates (graph)
                         if((j * (this._c.width/20)) == (ycof[i] * (this._c.width/20)) && (i * (this._c.width/20)) == (xcof[i])* (this._c.width/20))
