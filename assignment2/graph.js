@@ -22,23 +22,24 @@ Canvasapp2.prototype.drawGrid2=function(){
     for (i=0;i<=this._c.width;i+=(this._c.width)/10)
     {
 
-        if (i == (this._c.width)/2) // Special handling for horiz/vert axes
+        if (i == (this._c.width)/2) // different colors for origin lines
             {
-                this._ctx.lineWidth = 3; // Axes are thicker...
-                this._ctx.strokeStyle = 'blue'; //... and in red
+                this._ctx.lineWidth = 3; // line width
+                this._ctx.strokeStyle = 'blue'; //line color
             }
             else
             {
                 this._ctx.lineWidth = 1;
                 this._ctx.strokeStyle = 'red';
             }
+            //draw vertical line
             this._ctx.beginPath();
             this._ctx.moveTo(i, 0);
             this._ctx.lineTo(i, this._c.width);
             this._ctx.stroke();
             this._ctx.closePath();
     
-    //draw horizantal line
+             //draw horizantal line
     
             this._ctx.beginPath();
             this._ctx.moveTo(0, i);
@@ -65,7 +66,7 @@ Canvasapp2.prototype.drawGrid2=function(){
 Canvasapp2.prototype.drawLine2=function(){
       
         var ycof=[],xcof=[];
-        for(var i=0; i< 3;i++)
+        for(var i=0; i< 5;i++)
         {
            //finiding the co-ordinates of x and y coefficients.
            switch(this._op) {
@@ -92,26 +93,28 @@ Canvasapp2.prototype.drawLine2=function(){
             xcof[i] = i;
             
         }
-        alert(ycof);
-        alert(xcof);
+        alert("X cordinates"+xcof+"\nY cordinates"+ycof);
+        
         this._ctx.font = '15px _sans';
         this._ctx.textBaseline = 'bottom';
+        this._ctx.strokeStyle='blue';
         for(var i=-5; i< 5;i++)
         {
                     
                 for(var j=-5; j<5;j++)
                 {
-                          
+                        //validating x,y co-ordinates(equatio) with i,j co-ordinates (graph)
                         if((j * (this._c.width/10)) ==(ycof[i] * (this._c.width/10)) && (i * (this._c.width/10)) == (xcof[i])* (this._c.width/10))
                         {
-
+                            //fill a rectangle
                             this._ctx.fillRect(xcof[i] * (this._c.width/10),-ycof[i] * (this._c.width/10),10,10); 
+                            //fill text with (x,y) co-ordinates
                             this._ctx.fillText ("("+xcof[i].toString()+","+ycof[i].toString()+")", xcof[i] * (this._c.width/10), -ycof[i] * (this._c.width/10));
-                           /* this._ctx.moveTo(i * (this._c.width/10),i* (this._c.width/10));
-                            this._ctx.strokeStyle = 'green';
-                            this._ctx.lineTo(i* (this._c.width/10),j* (this._c.width/10));
-                            this._ctx.stroke();*/
-                            
+
+                            this._ctx.moveTo(xcof[i] * (this._c.width/10), -ycof[i] * (this._c.width/10));
+                             this._ctx.lineTo(xcof[++i] * (this._c.width/10), -ycof[++i] * (this._c.width/10));
+                             this._ctx.stroke();
+                                                       
 
                         }
                           
