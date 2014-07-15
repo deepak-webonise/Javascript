@@ -16,7 +16,7 @@ Canvasapp2.prototype.set=function(x,y,cst,op){
 
 Canvasapp2.prototype.drawGrid2=function(){
     //draw vertical and horizantal lines
-    for (i=0;i<=this._c.width;i+=(this._c.width)/10)
+    for (i=0;i<=this._c.width;i+=(this._c.width)/20)
     {
 
         if (i == (this._c.width)/2) // setting blue color for origin lines
@@ -48,13 +48,13 @@ Canvasapp2.prototype.drawGrid2=function(){
     this._ctx.font = '20px _sans';
     this._ctx.textBaseline = 'hanging';
     this._ctx.fillText ('0',0,0);
-    for (i=-10;i<=10;i++)
+    for (i=-20;i<=20;i++)
      {
         if (i != 0) { 
            // horizontal label
-              this._ctx.fillText (i*this._step, i*(this._c.width/10), 0);
+              this._ctx.fillText (i*this._step, i*(this._c.width/20), 0);
            // vertical label
-              this._ctx.fillText (i*this._step, 0, -i*(this._c.width/10));
+              this._ctx.fillText (i*this._step, 0, -i*(this._c.width/20));
         }
 
     }
@@ -98,24 +98,24 @@ Canvasapp2.prototype.drawLine2=function(){
         this._ctx.font = '15px _sans';
         this._ctx.textBaseline = 'bottom';
         this._ctx.strokeStyle='green';
-        this._ctx.lineWidth=2;
+        this._ctx.lineWidth=1;
 
-        this._ctx.moveTo(xcof[this._startp] * (this._c.width/10), ycof[this._startp] * (this._c.width/10));
+        this._ctx.moveTo(xcof[this._startp] * (this._c.width/20), ycof[this._startp] * (this._c.width/20));
         for(var i=-5; i< 5;i++)
         {
                     
                 for(var j=-5; j<5;j++)
                 {
                         //validating x,y co-ordinates(equatio) with i,j co-ordinates (graph)
-                        if((j * (this._c.width/10)) == (ycof[i] * (this._c.width/10)) && (i * (this._c.width/10)) == (xcof[i])* (this._c.width/10))
+                        if((j * (this._c.width/20)) == (ycof[i] * (this._c.width/20)) && (i * (this._c.width/20)) == (xcof[i])* (this._c.width/20))
                         {
                             //fill a rectangle
-                            this._ctx.fillRect(xcof[i] * (this._c.width/10),-ycof[i] * (this._c.width/10),10,10); 
+                            this._ctx.fillRect(xcof[i] * (this._c.width/20),-ycof[i] * (this._c.width/20),8,8); 
                             //fill text with (x,y) co-ordinates
-                            this._ctx.fillText ("("+xcof[i].toString()+","+ycof[i].toString()+")", xcof[i] * (this._c.width/10), -ycof[i] * (this._c.width/10));
+                            this._ctx.fillText ("("+xcof[i].toString()+","+ycof[i].toString()+")", xcof[i] * (this._c.width/20), -ycof[i] * (this._c.width/20));
 
                             //draw line
-                             this._ctx.lineTo(xcof[i] * (this._c.width/10), -ycof[i] * (this._c.width/10));
+                             this._ctx.lineTo(xcof[i] * (this._c.width/20), -ycof[i] * (this._c.width/20));
                              
                                                        
 
