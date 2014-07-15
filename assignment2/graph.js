@@ -1,21 +1,25 @@
-function Canvasapp2(eqn,step,startp,endp){
-    this._eqn =eqn;
+function Canvasapp2(step,startp,endp){
     this._step =step;
     this._startp =startp;
     this._endp =endp;
     this._c=document.getElementById("canvas");
     this._ctx=this._c.getContext("2d");
-    this._x = 4;
-    this._y = 6;
-    this._cst = 8;
+    
 
 
     //alert(this._eqn);
 
 }
+Canvasapp2.prototype.set=function(x,y,cst,op){
+    this._x = x ;
+    this._y = y ;
+    this._cst = cst;
+    this._op = op;
+}
+
 Canvasapp2.prototype.drawGrid2=function(){
     //draw vertical line
-    for (i=0;i<=this._c.width;i+=(this._c.width)/10)
+    for (i=0;i<=this._c.width;i+=(this._c.width)/this._step)
     {
 
         if (i == (this._c.width)/2) // Special handling for horiz/vert axes
@@ -26,7 +30,7 @@ Canvasapp2.prototype.drawGrid2=function(){
             else
             {
                 this._ctx.lineWidth = 1;
-                this._ctx.strokeStyle = 'blue';
+                this._ctx.strokeStyle = 'red';
             }
             this._ctx.beginPath();
             this._ctx.moveTo(i, 0);
@@ -59,31 +63,93 @@ Canvasapp2.prototype.drawGrid2=function(){
 
 }
 Canvasapp2.prototype.drawLine2=function(){
+      
+        var ycof=[],xcof=[];
+        for(var i=0; i< 3;i++)
+        {
+            switch(this._op) {
+                                    case "+":
+                                             ycof[i] = eval((this._cst - (this._x * i ))/this._y);
+                                              break;
+                                    case "-":
+                                             ycof[i] = eval((this._cst - (this._x * i ))/(-this._y));
+                                              break;
+                                    case "*":
+                                             ycof[i] = eval(this._cst / ((this._x * i )*this._y));
+                                              break;
+                                    case "/":
+                                             ycof[i] = eval((this._x * i )/(this._cst * this._y));
+                                              break;
+  
+                                    default:
+                                            alert("Invalid Operator ");
+                                            break;
+                                }
+ 
+    
+            xcof[i] = i;
+            
+        }
+        alert(ycof);
+        alert(xcof);
+        for(var i=-5; i< 5;i++)
+        {
+                    alert(ycof);
+                     alert(xcof);
+                for(var j=-5; j<5;j++)
+                {
+                          
+                        if(j==ycof[i] && i == xcof[i])
+                        {
 
-        this._ctx.lineWidth = 10;
-        this._ctx.strokeStyle = 'red';
-                    
-            this._ctx.beginPath();
-            this._ctx.moveTo(0, (this._cst/this._y)* (this._c.width/10));
-            this._ctx.lineTo((this._cst/this._x)* (this._c.width/10), 0);
-            this._ctx.stroke();
-            this._ctx.closePath();    
+                            this._ctx.fillRect(xcof[j] * (this._c.width/10),-ycof[j] * (this._c.width/10),10,10); 
+
+                        }
+                          
+
+
+                 }
+        }    
+            
 
 }
 function get()
 {
-var eqn = document.getElementById("eqn");
-var xc = 0;
+var eqn = document.getElementById("eqn").value;
+var step = document.getElementById("steps").value;
+var startp = document.getElementById("startp").value;
+var endp = document.getElementById("endp").value;
+eqn = eqn.replace(/ +/g, "");
+var xc=0,yc=0,cst=0;
 var i =0;
-while(eqn[i]!='x')
+
+        while(eqn[i]!='x')
         {
-            xc+=parseInt(eqn[i]);
+            xc+=eqn[i];
             i++;
         }
-        alert(xc);
+        var op = eqn[++i];
+        i++;
+        
+        while(eqn[i]!='y')
+        {
+            yc+=eqn[i];
+            i++;
+        }
 
+        i++;
+        i++;
+       
+        while(i < eqn.length){
 
-var g = new Canvasapp2("x+y=0",10,10,10);
+            cst+=eqn[i];
+            i++;
+           
+        }
+
+var g = new Canvasapp2(step,startp,endp);
+alert(step);
+g.set(xc-0,yc-0,cst-0,op);
 g.drawGrid2();
 g.drawLine2();
 
