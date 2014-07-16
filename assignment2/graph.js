@@ -52,9 +52,9 @@ Canvasapp2.prototype.drawGrid2=function(){
      {
         if (i != 0) { 
            // horizontal label
-              this._ctx.fillText (i*this._step, i*(this._c.width/20), 0);
+              this._ctx.fillText (i, i*(this._c.width/20), 0);
            // vertical label
-              this._ctx.fillText (i*this._step, 0, -i*(this._c.width/20));
+              this._ctx.fillText (i, 0, -i*(this._c.width/20));
         }
 
     }
