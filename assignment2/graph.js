@@ -62,7 +62,7 @@ Canvasapp2.prototype.drawGrid2=function(){
 }
 Canvasapp2.prototype.drawLine2=function(){
       
-        var ycof=[],xcof=[];
+        var ycof=[],xcof=[],j=0,p=0;
         //setting start and end point for equation
         for(var i=this._startp; i<this._endp;i+=this._step)
         {
@@ -70,9 +70,9 @@ Canvasapp2.prototype.drawLine2=function(){
            switch(this._op) {
                                    //finding the cordinates of y coefficient depending on operator 
                                     case "+":
-                                             ycof[i] = eval((this._cst - (this._x * i ))/this._y);
-                                             xcof[i] = i;
-                                              break;
+                                             ycof[j++] = eval((this._cst - (this._x * i ))/this._y);
+                                             xcof[p++] = i;
+                                             break;
                                     case "-":
                                              ycof[i] = eval((this._cst - (this._x * i ))/(-this._y));
                                              xcof[i] = i;
@@ -100,34 +100,32 @@ Canvasapp2.prototype.drawLine2=function(){
         this._ctx.strokeStyle='green';
         this._ctx.lineWidth=1;
 
-        this._ctx.moveTo(xcof[this._startp] * (this._c.width/20), ycof[this._startp] * (this._c.width/20));
-        for(var i=-5; i< 5;i++)
+        this._ctx.moveTo(xcof[0] * (this._c.width/20), ycof[0] * (this._c.width/20));
+        for(var i=-10; i< 10;i++)
         {
                     
-               for(var j=-5; j<5;j++)
+               for(var j=-10; j<10;j++)
                 {
-                        //validating x,y co-ordinates(equatio) with i,j co-ordinates (graph)
-                        if((j * (this._c.width/20)) == (ycof[i] * (this._c.width/20)) && (i * (this._c.width/20)) == (xcof[i])* (this._c.width/20))
-                        {
-                            //fill a rectangle
-                            this._ctx.fillRect(xcof[i] * (this._c.width/20),-ycof[i] * (this._c.width/20),8,8); 
-                            //fill text with (x,y) co-ordinates
-                            this._ctx.fillText ("("+xcof[i].toString()+","+ycof[i].toString()+")", xcof[i] * (this._c.width/20), -ycof[i] * (this._c.width/20));
 
-                            //draw line
-                             this._ctx.lineTo(xcof[i] * (this._c.width/20), -ycof[i] * (this._c.width/20));
-                             
-                                                       
+                        for(var k=0;k<=p+1;k++){
 
+
+                       
+                             //validating x,y co-ordinates(equatio) with i,j co-ordinates (graph)
+                                if(j  == ycof[k] && i == xcof[k])
+                                {
+                                  //fill a rectangle
+                                    this._ctx.fillRect(xcof[k] * (this._c.width/20),-ycof[k] * (this._c.width/20),8,8); 
+                                 //fill text with (x,y) co-ordinates
+                                    this._ctx.fillText ("("+xcof[k].toString()+","+ycof[k].toString()+")", xcof[k] * (this._c.width/20), -ycof[i] * (this._c.width/20));
+
+                                    //draw line
+                                     this._ctx.lineTo(xcof[k] * (this._c.width/20), -ycof[k] * (this._c.width/20));                    
+                                }
                         }
-                          
-
-
                  }
         } 
-        this._ctx.stroke();   
-            
-
+        this._ctx.stroke(); 
 }
 function get()
 {
@@ -154,7 +152,6 @@ function get()
             yc+=eqn[i];
             i++;
         }
-
         i++;
         i++;
        //parsing constant
@@ -162,14 +159,11 @@ function get()
 
             cst+=eqn[i];
             i++;
-           
         }
-//creating object of Canvasapp2 function
-var g = new Canvasapp2(step-0,startp-0,endp-0);
-alert("Scale ="+step);
-g.set(xc-0,yc-0,cst-0,op);
-g.drawGrid2();
-g.drawLine2();
-
+    //creating object of Canvasapp2 function
+    var g = new Canvasapp2(step-0,startp-0,endp-0);
+    alert("Scale = 1");
+    g.set(xc-0,yc-0,cst-0,op);
+    g.drawGrid2();
+    g.drawLine2();
 }
-
